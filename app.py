@@ -1,6 +1,6 @@
 # app.py
 from flask import Flask, request, jsonify
-import smtplib, os
+import smtplib, os, atexit
 # Imports, of course
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -9,6 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.firefox.options import Options
 from email.message import EmailMessage
 from bs4 import BeautifulSoup
+from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
 gmail_user = os.environ.get('GMAIL_USER', None)
@@ -28,7 +29,7 @@ def load_firefox_driver():
 
 # A welcome message to test our server
 @app.route('/proteinstatus')
-def index():
+def proteinstatus():
 
     # Initialize a Firefox webdriver
     driver = load_firefox_driver()
@@ -58,7 +59,7 @@ def index():
     hasProduct = True if productInStock else False
     # hasNoProduct = True if productNotInStock else False
 
-    if not hasProduct:
+    if hasProduct:
         receivers = ['jackeaik@hotmail.com']
         msg = EmailMessage()
         msg.set_content("The product on your watchlist is now available.")
@@ -74,9 +75,7 @@ def index():
             print("Successfully sent email")
         except:
             print("Error: unable to send email")
-
-    return "<h1>It is available!!</h1>"
-
+    return "<h1>Tryna get BIG</h1>"
 
 @app.after_request
 def after_request(response):
@@ -84,6 +83,13 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
     return response
+
+sched = BackgroundScheduler()
+sched.add_job(func=proteinstatus, trigger="interval", minutes=60)
+sched.start()
+
+# Shut down the scheduler when exiting the app
+atexit.register(lambda: sched.shutdown())
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
