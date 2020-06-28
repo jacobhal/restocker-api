@@ -16,6 +16,12 @@ For this project, we had to use selenium since the web scraping depended on a ce
 The geckodriver for running Selenium in Firefox was added using ```heroku buildpacks:add https://github.com/ronnielivingsince1994/heroku-integrated-firefox-geckodriver```
 
 Remember to also set the necessary CONFIG vars on Heroku for the buildpack to work when deployed.
+The local .env variables for MAC are as following for me:
+
+```
+FIREFOX_BIN=/Applications/Firefox.app/Contents/MacOS/firefox-bin
+GECKODRIVER_PATH=/usr/local/bin/geckodriver`
+```
 
 ## If heroku local connection is busy
 Find process for port: ```lsof -n -i4TCP:5000```
