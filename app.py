@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.firefox.options import Options
 from email.message import EmailMessage
 from bs4 import BeautifulSoup
 
@@ -13,12 +14,24 @@ app = Flask(__name__)
 gmail_user = os.environ.get('GMAIL_USER', None)
 gmail_password = os.environ.get('GMAIL_PW', None)
 
+def load_firefox_driver():
+
+    options = Options()
+
+    options.binary_location = os.environ.get('FIREFOX_BIN')
+
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+
+    return webdriver.Firefox(executable_path=str(os.environ.get('GECKODRIVER_PATH')), firefox_options=options)
+
 # A welcome message to test our server
 @app.route('/proteinstatus')
 def index():
 
     # Initialize a Firefox webdriver
-    driver = webdriver.Firefox()
+    driver = load_firefox_driver()
 
     # TODO: Add parameter for URL
     driver.get('https://www.mmsports.se/Kosttillskott/Protein/Vassleprotein-Whey/Body-Science-Whey-100.html?gclid=CjwKCAjw_-D3BRBIEiwAjVMy7AJaBCisTox5QredRmOFc3ETJLJayGNN-3oqaVqXwOkl3-aiAWsbdRoCwcYQAvD_BwE')
