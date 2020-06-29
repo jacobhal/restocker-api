@@ -49,6 +49,7 @@ def restockCheck(restockUrl, restockEmail, dropdownName, dropdownId, dropdownVal
         trackContainer, trackValue, trackClass):
     # Initialize a Firefox webdriver
     driver = load_firefox_driver()
+    driver.get(restockUrl)
 
     if dropdownId is not None or dropdownName is not None:
         productDropdown = None
