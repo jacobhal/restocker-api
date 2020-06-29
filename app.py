@@ -77,7 +77,7 @@ def proteinstatus():
             print("Error: unable to send email")
         
     # Quit driver and close browser
-    driver.close()
+    driver.quit()
     return "<h1>Tryna get BIG</h1>"
 
 @app.after_request
