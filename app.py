@@ -59,7 +59,7 @@ def proteinstatus():
     hasProduct = True if productInStock else False
     # hasNoProduct = True if productNotInStock else False
 
-    if not hasProduct:
+    if hasProduct:
         receivers = ['jackeaik@hotmail.com']
         msg = EmailMessage()
         msg.set_content("The product on your watchlist is now available.")
@@ -88,7 +88,7 @@ def after_request(response):
     return response
 
 sched = BackgroundScheduler()
-sched.add_job(func=proteinstatus, trigger="interval", minutes=3)
+sched.add_job(func=proteinstatus, trigger="interval", minutes=30)
 sched.start()
 
 # Shut down the scheduler when exiting the app
