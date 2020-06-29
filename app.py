@@ -15,6 +15,8 @@ app = Flask(__name__)
 gmail_user = os.environ.get('GMAIL_USER', None)
 gmail_password = os.environ.get('GMAIL_PW', None)
 
+sched = BackgroundScheduler()
+
 def load_firefox_driver():
 
     options = Options()
@@ -59,7 +61,7 @@ def proteinstatus():
     hasProduct = True if productInStock else False
     # hasNoProduct = True if productNotInStock else False
 
-    if hasProduct:
+    if not hasProduct:
         receivers = ['jackeaik@hotmail.com']
         msg = EmailMessage()
         msg.set_content("The product on your watchlist is now available.")
@@ -72,6 +74,7 @@ def proteinstatus():
             server.login(gmail_user, gmail_password)   
             server.send_message(msg)    
             server.quit()
+            sched.shutdown()
             print("Successfully sent email")
         except:
             print("Error: unable to send email")
@@ -87,8 +90,7 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
     return response
 
-sched = BackgroundScheduler()
-sched.add_job(func=proteinstatus, trigger="interval", minutes=30)
+sched.add_job(func=proteinstatus, trigger="interval", minutes=3)
 sched.start()
 
 # Shut down the scheduler when exiting the app
