@@ -47,6 +47,9 @@ def proteinstatus():
     # dropdownById = driver.find_element_by_id("id")
     # productDropdown.select_by_value("29815")
 
+    # Quit driver and close browser
+    driver.quit()
+
     html = BeautifulSoup(driver.page_source, "html.parser")
 
     # TODO: Implement find by value
