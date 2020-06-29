@@ -47,9 +47,6 @@ def proteinstatus():
     # dropdownById = driver.find_element_by_id("id")
     # productDropdown.select_by_value("29815")
 
-    # Quit driver and close browser
-    driver.quit()
-
     html = BeautifulSoup(driver.page_source, "html.parser")
 
     # TODO: Implement find by value
@@ -78,6 +75,9 @@ def proteinstatus():
             print("Successfully sent email")
         except:
             print("Error: unable to send email")
+        
+    # Quit driver and close browser
+    driver.close()
     return "<h1>Tryna get BIG</h1>"
 
 @app.after_request
@@ -88,7 +88,7 @@ def after_request(response):
     return response
 
 sched = BackgroundScheduler()
-sched.add_job(func=proteinstatus, trigger="interval", minutes=1)
+sched.add_job(func=proteinstatus, trigger="interval", minutes=3)
 sched.start()
 
 # Shut down the scheduler when exiting the app
