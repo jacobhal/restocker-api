@@ -1,3 +1,11 @@
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+from email.message import EmailMessage
+import smtplib, os, atexit
+
+gmail_user = os.environ.get('GMAIL_USER', None)
+gmail_password = os.environ.get('GMAIL_PW', None)
+
 def load_firefox_driver():
 
     options = Options()
@@ -9,7 +17,7 @@ def load_firefox_driver():
     options.add_argument('--disable-dev-smh-usage')
     options.add_argument('--no-sandbox')
 
-    return webdriver.Firefox(executable_path=str(os.environ.get('GECKODRIVER_PATH')), firefox_options=options)
+    return webdriver.Firefox(executable_path=str(os.environ.get('GECKODRIVER_PATH')), options=options)
 
 def send_restock_email(toEmail):
     receivers = [toEmail]

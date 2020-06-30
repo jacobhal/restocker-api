@@ -7,8 +7,6 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.firefox.options import Options
-from email.message import EmailMessage
 from bs4 import BeautifulSoup
 from apscheduler.schedulers.blocking import BlockingScheduler
 
@@ -19,7 +17,7 @@ gmail_password = os.environ.get('GMAIL_PW', None)
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('interval', minutes=1)
+@sched.scheduled_job('interval', minutes=60)
 def proteinstatus():
     """This function checks whether apple pie protein powder is available on MM Sports"""
     # Initialize a Firefox webdriver
@@ -27,7 +25,6 @@ def proteinstatus():
     driver = load_firefox_driver()
     driver.get('https://www.mmsports.se/Kosttillskott/Protein/Vassleprotein-Whey/Body-Science-Whey-100.html?gclid=CjwKCAjw_-D3BRBIEiwAjVMy7AJaBCisTox5QredRmOFc3ETJLJayGNN-3oqaVqXwOkl3-aiAWsbdRoCwcYQAvD_BwE')
 
-    print('Loaded driver with url')
     # We use .find_element_by_name here because we know the name
     productDropdown = Select(driver.find_element_by_name("product_options[628]"))
     productDropdown.select_by_value("29815")
@@ -40,9 +37,9 @@ def proteinstatus():
 
     hasProduct = True if productInStock else False
 
-    if not hasProduct:
+    if hasProduct:
         print("Product back in stock")
-        sendRestockEmail('jackeaik@hotmail.com')
+        # send_restock_email('jackeaik@hotmail.com')
     else:
         print("Product not yet back in stock")
     

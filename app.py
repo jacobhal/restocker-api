@@ -7,14 +7,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.firefox.options import Options
-from email.message import EmailMessage
 from bs4 import BeautifulSoup
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 app = Flask(__name__)
-gmail_user = os.environ.get('GMAIL_USER', None)
-gmail_password = os.environ.get('GMAIL_PW', None)
 
 def run_selenium(restockUrl, restockEmail, dropdownName, dropdownId, dropdownValue, 
         trackContainer, trackValue, trackClass):
