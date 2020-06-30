@@ -1,6 +1,4 @@
-# app.py
-from flask import Flask, request, jsonify
-import smtplib, os, atexit
+import atexit
 from functions import load_firefox_driver, send_restock_email
 # Imports, of course
 from selenium import webdriver
@@ -9,8 +7,6 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from bs4 import BeautifulSoup
 from apscheduler.schedulers.blocking import BlockingScheduler
-
-app = Flask(__name__)
 
 sched = BlockingScheduler()
 
