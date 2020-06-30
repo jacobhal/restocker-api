@@ -9,7 +9,7 @@ Add config to Heroku and add the same config in a .env file to make heroku local
 
 Procfile flask config: ```web: gunicorn app:app --worker-class eventlet --timeout 120 --log-level debug --workers 3```
 
-Procfile cronjob config: ```clock: python cron_job.py```
+Procfile cronjob config: ```clock: python cron_job.py``` --> Run following command when deployed: ```heroku ps:scale clock=1``` which will scale clock dynos to 1.
 
 ## Update requirements.txt
 ```pip freeze > requirements.txt```
