@@ -1,6 +1,7 @@
 # app.py
 from flask import Flask, request, jsonify
 import smtplib, os, atexit
+from functions import load_firefox_driver, send_restock_email
 # Imports, of course
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -17,35 +18,6 @@ gmail_password = os.environ.get('GMAIL_PW', None)
 
 sched = BlockingScheduler()
 
-def load_firefox_driver():
-
-    options = Options()
-
-    options.binary_location = os.environ.get('FIREFOX_BIN')
-
-    options.add_argument('--headless')
-    # options.add_argument('--disable-gpu')
-    options.add_argument('--disable-dev-smh-usage')
-    options.add_argument('--no-sandbox')
-
-    return webdriver.Firefox(executable_path=str(os.environ.get('GECKODRIVER_PATH')), options=options)
-
-def sendRestockEmail(toEmail):
-    receivers = [toEmail]
-    msg = EmailMessage()
-    msg.set_content("The product on your watchlist is now available.")
-    msg['Subject'] = 'Product is now back in stock!'
-    msg['From'] = 'RestockBot'
-    msg['To'] = toEmail
-    try:
-        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-        server.login(gmail_user, gmail_password)   
-        server.send_message(msg)    
-        server.quit()
-        print("Successfully sent email")
-    except:
-        print("Error: unable to send email")
-
 
 @sched.scheduled_job('interval', minutes=1)
 def proteinstatus():
@@ -60,11 +32,8 @@ def proteinstatus():
     productDropdown = Select(driver.find_element_by_name("product_options[628]"))
     productDropdown.select_by_value("29815")
 
-    print('Do stuff on page')
 
     html = BeautifulSoup(driver.page_source, "html.parser")
-
-    print('Select html...')
 
     productInStock = html.select('div.product-status-ok')
     productNotInStock = html.select('div.product-status-nok')
