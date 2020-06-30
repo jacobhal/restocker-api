@@ -1,18 +1,39 @@
 # restocker-api
 A python API for checking restocking of products on websites.  
 
-## Guide to create a python API for heroku 
+## Guide to create a python API for Heroku 
 <https://stackabuse.com/deploying-a-flask-application-to-heroku/>
 
-## Heroku config for private variables
-Add config to Heroku and add the same config in a .env file to make heroku local work.
+1. Create a Git repository for your app.
 
+2. Create a virtual environment: ```python -m venv <NAME>/````.
+
+3. Activate it: ```source <NAME>/bin/activate````.
+
+4. `pip install flask` && `pip install gunicorn`.
+
+5. Create app.py and setup a basic Flask template and test it locally with `python app.py`.
+
+6. Use `pip freeze > requirements.txt` to create a requirements.txt with all the packages installed which
+will install them on the Heroku server.
+
+7. Create a file named "Procfile" and add the line `web: gunicorn app:app`. If you are implementing some scheduled script you can use the config for that in section [[Procfile](#procfile-config-for-flaskcron-jobs).
+
+8. Create a new app on Heroku (if you haven't made a git repo yet you can use `git init .` and do it now).
+
+9. Push all your changes to git and use `heroku login -i` to login to Heroku through the terminal.
+
+10. Use `heroku git:remote -a {your-project-name}` where the project name is the name of the app on Heroku.
+
+11. Use `git push heroku master` to push your latest git changes to Heroku. You can also setup a connection to your Git repo on Heroku and deploy your branches directly on there if you like.
+
+## Heroku config for private variables
+If you have config variables that are used on Heroku, such as API keys, personal emails etc. you can add those to a local .env file which will be picked up automatically by Heroku when you run `heroku local` instead of running a python file.
+
+## Procfile config for Flask/Cron jobs
 Procfile flask config: ```web: gunicorn app:app --worker-class eventlet --timeout 120 --log-level debug --workers 3```
 
 Procfile cronjob config: ```clock: python cron_job.py``` --> Run following command when deployed: ```heroku ps:scale clock=1``` which will scale clock dynos to 1.
-
-## Update requirements.txt
-```pip freeze > requirements.txt```
 
 ## Selenium
 For this project, we had to use selenium since the web scraping depended on a certain dropdown value being chosen first (a certain product).
