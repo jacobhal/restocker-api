@@ -11,8 +11,6 @@ from bs4 import BeautifulSoup
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 app = Flask(__name__)
-gmail_user = os.environ.get('GMAIL_USER', None)
-gmail_password = os.environ.get('GMAIL_PW', None)
 
 sched = BlockingScheduler()
 
