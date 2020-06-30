@@ -9,13 +9,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.firefox.options import Options
 from email.message import EmailMessage
 from bs4 import BeautifulSoup
-from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 app = Flask(__name__)
 gmail_user = os.environ.get('GMAIL_USER', None)
 gmail_password = os.environ.get('GMAIL_PW', None)
 
-sched = BackgroundScheduler()
+sched = BlockingScheduler()
 
 def load_firefox_driver():
 
@@ -104,7 +104,7 @@ def addrestockwatcher():
     if (trackContainer is None or trackValue is None) and trackClass is None:
         return f'You have to search either by value (trackValue & trackValueContainer) or class (trackClass)'
 
-    scheduler = BackgroundScheduler()
+    scheduler = BlockingScheduler()
 
     # Start a scheduler
     scheduler.add_job(func=lambda: restockCheck(restockUrl, restockEmail, dropdownName, dropdownId, dropdownValue, 
@@ -127,6 +127,7 @@ def after_request(response):
 def proteinstatus():
     """This function checks whether apple pie protein powder is available on MM Sports"""
     # Initialize a Firefox webdriver
+    print('Setting up driver...')
     driver = load_firefox_driver()
     driver.get('https://www.mmsports.se/Kosttillskott/Protein/Vassleprotein-Whey/Body-Science-Whey-100.html?gclid=CjwKCAjw_-D3BRBIEiwAjVMy7AJaBCisTox5QredRmOFc3ETJLJayGNN-3oqaVqXwOkl3-aiAWsbdRoCwcYQAvD_BwE')
 
@@ -136,37 +137,24 @@ def proteinstatus():
 
     html = BeautifulSoup(driver.page_source, "html.parser")
 
-    # TODO: Implement find by value
-    restockInfo = html.select('div.product-stock-status')
+    print('Select html...')
 
-    # TODO: Add variables for find by class
     productInStock = html.select('div.product-status-ok')
     productNotInStock = html.select('div.product-status-nok')
 
     hasProduct = True if productInStock else False
-    # hasNoProduct = True if productNotInStock else False
 
-    if hasProduct:
-        receivers = ['jackeaik@hotmail.com']
-        msg = EmailMessage()
-        msg.set_content("The product on your watchlist is now available.")
-        msg['Subject'] = 'Product is now back in stock!'
-        msg['From'] = 'MMSports - Web Scraping'
-        msg['To'] = 'jackeaik@hotmail.com'
-        try:
-            server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-            server.login(gmail_user, gmail_password)   
-            server.send_message(msg)    
-            server.quit()
-            print("Successfully sent email")
-        except:
-            print("Error: unable to send email")
-        
+    if not hasProduct:
+        print("Product back in stock")
+        sendRestockEmail('jackeaik@hotmail.com')
+    else:
+        print("Product not yet back in stock")
+    
     # Quit driver and close browser
     driver.quit()
 
 # Start a scheduler to check for protein powder every 30 minutes
-sched.add_job(func=proteinstatus, trigger="interval", minutes=30)
+sched.add_job(func=proteinstatus, trigger="interval", minutes=2)
 sched.start()
 
 # Shut down the scheduler when exiting the app
