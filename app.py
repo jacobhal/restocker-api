@@ -24,7 +24,8 @@ def load_firefox_driver():
     options.binary_location = os.environ.get('FIREFOX_BIN')
 
     options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
+    # options.add_argument('--disable-gpu')
+    options.add_argument('--disable-dev-smh-usage')
     options.add_argument('--no-sandbox')
 
     return webdriver.Firefox(executable_path=str(os.environ.get('GECKODRIVER_PATH')), firefox_options=options)
@@ -124,6 +125,7 @@ def after_request(response):
     return response
 
 
+@sched.scheduled_job('interval', minutes=30)
 def proteinstatus():
     """This function checks whether apple pie protein powder is available on MM Sports"""
     # Initialize a Firefox webdriver
@@ -131,9 +133,12 @@ def proteinstatus():
     driver = load_firefox_driver()
     driver.get('https://www.mmsports.se/Kosttillskott/Protein/Vassleprotein-Whey/Body-Science-Whey-100.html?gclid=CjwKCAjw_-D3BRBIEiwAjVMy7AJaBCisTox5QredRmOFc3ETJLJayGNN-3oqaVqXwOkl3-aiAWsbdRoCwcYQAvD_BwE')
 
+    print('Loaded driver with url')
     # We use .find_element_by_name here because we know the name
     productDropdown = Select(driver.find_element_by_name("product_options[628]"))
     productDropdown.select_by_value("29815")
+
+    print('Do stuff on page')
 
     html = BeautifulSoup(driver.page_source, "html.parser")
 
@@ -144,7 +149,7 @@ def proteinstatus():
 
     hasProduct = True if productInStock else False
 
-    if not hasProduct:
+    if hasProduct:
         print("Product back in stock")
         sendRestockEmail('jackeaik@hotmail.com')
     else:
@@ -154,11 +159,11 @@ def proteinstatus():
     driver.quit()
 
 # Start a scheduler to check for protein powder every 30 minutes
-sched.add_job(func=proteinstatus, trigger="interval", minutes=2)
+# sched.add_job(func=proteinstatus, trigger="interval", minutes=1)
 sched.start()
 
 # Shut down the scheduler when exiting the app
-atexit.register(lambda: sched.shutdown())
+# atexit.register(lambda: sched.shutdown())
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
