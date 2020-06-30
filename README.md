@@ -7,6 +7,8 @@ A python API for checking restocking of products on websites.
 ## Heroku config for private variables
 Add config to Heroku and add the same config in a .env file to make heroku local work.
 
+Procfile: ```web: gunicorn app:app --worker-class eventlet --timeout 120 --log-level debug --workers 3```
+
 ## Update requirements.txt
 ```pip freeze > requirements.txt```
 

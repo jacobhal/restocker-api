@@ -1,1 +1,1 @@
-web: gunicorn app:app --worker-class eventlet --timeout 120 --log-level debug --workers 3
+clock: python cron_job.py
