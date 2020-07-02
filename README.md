@@ -1,6 +1,8 @@
 # restocker-api
-A python API for checking restocking of products on websites.  
+Restocker is a way to check if your favourite product is in stock if the website does not have its own watch feature.
+app.py contains a template for doing this via a Flask API, so you could setup a scheduler on your website to call that API as often as you like.
 
+The other easier way to do it is do use a cron job implemented like cron_job.py. That file is watching for protein powder with taste Apple Pie at MM Sports. This is deployed to Heroku and runs every hour and will send an email if the product is available.
 ## Guide to create a python API/Cron job for Heroku 
 <https://stackabuse.com/deploying-a-flask-application-to-heroku/>
 
