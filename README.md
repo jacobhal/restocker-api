@@ -57,7 +57,7 @@ The local .env variables for MAC are as following for me:
 
 ```
 FIREFOX_BIN=/Applications/Firefox.app/Contents/MacOS/firefox-bin
-GECKODRIVER_PATH=/usr/local/bin/geckodriver`
+GECKODRIVER_PATH=/usr/local/bin/geckodriver
 ```
 
 ## If heroku local connection is busy
