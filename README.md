@@ -1,23 +1,31 @@
 # restocker-api
 A python API for checking restocking of products on websites.  
 
-## Guide to create a python API for Heroku 
+## Guide to create a python API/Cron job for Heroku 
 <https://stackabuse.com/deploying-a-flask-application-to-heroku/>
 
 1. Create a Git repository for your app.
 
-2. Create a virtual environment: ```python -m venv <NAME>/````.
+2. Create a virtual environment: ```python -m venv <NAME>/```.
 
-3. Activate it: ```source <NAME>/bin/activate````.
+3. Activate it: ```source <NAME>/bin/activate```.
 
-4. `pip install flask` && `pip install gunicorn`.
+4. If you’re creating an API: `pip install flask` && `pip install gunicorn`.
 
-5. Create app.py and setup a basic Flask template and test it locally with `python app.py`.
+If you’re creating a Cron job: Install APScheduler through pip or some other scheduler
+
+5. If you’re creating an API: Create app.py and setup a basic Flask template and test it locally with `python app.py`.
+
+If you’re creating a Cron job: Create a file cron_job.py or similar and setup a basic Blockingscheduler function
 
 6. Use `pip freeze > requirements.txt` to create a requirements.txt with all the packages installed which
 will install them on the Heroku server.
 
-7. Create a file named "Procfile" and add the line `web: gunicorn app:app`. If you are implementing some scheduled script you can use the config for that in section [[Procfile](#procfile-config-for-flaskcron-jobs).
+7. Create a file named "Procfile".
+
+If you’re creating an API: add the line `web: gunicorn app:app` or copy the config in section [Procfile](#procfile-config-for-flaskcron-jobs).
+
+If you’re creating a Cron job application: If you are implementing some scheduled script you can use the Procfile config for that in section [Procfile](#procfile-config-for-flaskcron-jobs).
 
 8. Create a new app on Heroku (if you haven't made a git repo yet you can use `git init .` and do it now).
 
