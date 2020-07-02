@@ -46,7 +46,9 @@ Procfile cronjob config: ```clock: python cron_job.py``` --> Run following comma
 ## Selenium
 For this project, we had to use selenium since the web scraping depended on a certain dropdown value being chosen first (a certain product).
 
-The geckodriver for running Selenium in Firefox was added using ```heroku buildpacks:add https://github.com/ronnielivingsince1994/heroku-integrated-firefox-geckodriver```
+The geckodriver for running Selenium in Firefox was added using ```heroku buildpacks:add https://github.com/evosystem-jp/heroku-buildpack-firefox ```
+
+There are multiple buildpacks on Github available for Firefox, Chrome and PhantomJS so you can try out different ones if there are any issues.
 
 Remember to also set the necessary CONFIG vars on Heroku for the buildpack to work when deployed.
 The local .env variables for MAC are as following for me:
