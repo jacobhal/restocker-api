@@ -33,7 +33,7 @@ def proteinstatus():
 
     if hasProduct:
         print("Product back in stock")
-        # send_restock_email('jackeaik@hotmail.com')
+        send_restock_email('jackeaik@hotmail.com', sched)
     else:
         print("Product not yet back in stock")
     

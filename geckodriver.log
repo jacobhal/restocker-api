@@ -593,3 +593,47 @@ Exiting due to channel error.
 1593518807421	Marionette	INFO	Listening on port 57109
 1593518807507	Marionette	WARN	TLS certificate errors will be ignored for this session
 1593518812614	Marionette	INFO	Stopped listening on port 57109
+1593781457992	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "--headless" "--disable-dev-smh-usage" "--no-sandbox" "-foreground" "-no-remote" "-profile" "/var/folders/05/qg2lwvdn4cl6vm_lk0sv5vp40000gn/T/rust_mozprofileLTZLrv"
+*** You are running in headless mode.
+1593781461110	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1593781461110	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1593781461110	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1593781461111	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1593781464761	Marionette	INFO	Listening on port 58651
+1593781464828	Marionette	WARN	TLS certificate errors will be ignored for this session
+1593781477508	Marionette	INFO	Stopped listening on port 58651
+1593781669911	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "--headless" "--disable-dev-smh-usage" "--no-sandbox" "-foreground" "-no-remote" "-profile" "/var/folders/05/qg2lwvdn4cl6vm_lk0sv5vp40000gn/T/rust_mozprofileeGgLCm"
+*** You are running in headless mode.
+1593781670745	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1593781670746	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1593781670746	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1593781670746	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1593781674046	Marionette	INFO	Listening on port 59758
+1593781674090	Marionette	WARN	TLS certificate errors will be ignored for this session
+1593781689346	Marionette	INFO	Stopped listening on port 59758
+1593781793031	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "--headless" "--disable-dev-smh-usage" "--no-sandbox" "-foreground" "-no-remote" "-profile" "/var/folders/05/qg2lwvdn4cl6vm_lk0sv5vp40000gn/T/rust_mozprofilebJ0ugW"
+*** You are running in headless mode.
+1593781794796	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1593781794797	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1593781794797	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1593781794798	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1593781800803	Marionette	INFO	Listening on port 60419
+1593781800921	Marionette	WARN	TLS certificate errors will be ignored for this session
+1593781890254	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "--headless" "--disable-dev-smh-usage" "--no-sandbox" "-foreground" "-no-remote" "-profile" "/var/folders/05/qg2lwvdn4cl6vm_lk0sv5vp40000gn/T/rust_mozprofilerUMbNv"
+*** You are running in headless mode.
+1593781891097	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1593781891098	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1593781891098	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1593781891098	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1593781893868	Marionette	INFO	Listening on port 60979
+1593781893962	Marionette	WARN	TLS certificate errors will be ignored for this session
+1593781907357	Marionette	INFO	Stopped listening on port 60979
+1593782124802	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "--headless" "--disable-dev-smh-usage" "--no-sandbox" "-foreground" "-no-remote" "-profile" "/var/folders/05/qg2lwvdn4cl6vm_lk0sv5vp40000gn/T/rust_mozprofilezUJURE"
+*** You are running in headless mode.
+1593782125553	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1593782125553	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1593782125554	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1593782125554	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1593782128277	Marionette	INFO	Listening on port 62269
+1593782128376	Marionette	WARN	TLS certificate errors will be ignored for this session
+1593782140354	Marionette	INFO	Stopped listening on port 62269

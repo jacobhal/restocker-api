@@ -19,18 +19,23 @@ def load_firefox_driver():
 
     return webdriver.Firefox(executable_path=str(os.environ.get('GECKODRIVER_PATH')), options=options)
 
-def send_restock_email(toEmail):
+def send_restock_email(toEmail, scheduler = None):
     receivers = [toEmail]
     msg = EmailMessage()
     msg.set_content("The product on your watchlist is now available.")
     msg['Subject'] = 'Product is now back in stock!'
-    msg['From'] = 'RestockBot'
+    msg['From'] = 'RestockBot - Product available'
     msg['To'] = toEmail
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
         server.login(gmail_user, gmail_password)   
         server.send_message(msg)    
         server.quit()
+        if scheduler is not None:
+            if scheduler.running:
+                print('Shutting down scheduler')
+                # Shutdown cron job if the product is back in stock and close any started processes
+                scheduler.shutdown(wait=False) 
         print("Successfully sent email")
-    except:
+    except err:
         print("Error: unable to send email")
