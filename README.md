@@ -40,6 +40,11 @@ If you’re creating a Cron job application: If you are implementing some schedu
 ## Heroku config for private variables
 If you have config variables that are used on Heroku, such as API keys, personal emails etc. you can add those to a local .env file which will be picked up automatically by Heroku when you run `heroku local` instead of running a python file.
 
+## Running locally
+```heroku local``` for running your heroku cron jobs locally. This will also work if you have a Flask app.
+
+If you want to run just a Flask server locally to test it out, use `flask run`.
+
 ## Procfile config for Flask/Cron jobs
 Procfile flask config: ```web: gunicorn app:app --worker-class eventlet --timeout 120 --log-level debug --workers 3```
 
@@ -66,3 +71,4 @@ Kill process: ```kill -9 PID```
 
 ## If you want to stop your cron job when the product is back in stock
 Go into Heroku and disable the clock dyno or use `heroku ps:scale clock=0` in the terminal.
+
