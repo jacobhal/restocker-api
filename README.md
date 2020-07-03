@@ -50,6 +50,8 @@ Procfile flask config: ```web: gunicorn app:app --worker-class eventlet --timeou
 
 Procfile cronjob config: ```clock: python cron_job.py``` --> Run following command when deployed: ```heroku ps:scale clock=1``` which will scale clock dynos to 1.
 
+You CAN have both lines in your Procfile config and turn the dynos off/on depending on if you want them to run or not.
+
 ## Selenium
 For this project, we had to use selenium since the web scraping depended on a certain dropdown value being chosen first (a certain product).
 
