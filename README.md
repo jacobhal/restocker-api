@@ -63,3 +63,6 @@ GECKODRIVER_PATH=/usr/local/bin/geckodriver
 ## If heroku local connection is busy
 Find process for port: ```lsof -n -i4TCP:5000```
 Kill process: ```kill -9 PID```
+
+## If you want to stop your cron job when the product is back in stock
+Go into Heroku and disable the clock dyno or use `heroku ps:scale clock=0` in the terminal.
