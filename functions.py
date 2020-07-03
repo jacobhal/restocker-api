@@ -37,5 +37,5 @@ def send_restock_email(toEmail, scheduler = None):
                 # Shutdown cron job if the product is back in stock and close any started processes
                 # scheduler.shutdown(wait=False) 
         print("Successfully sent email")
-    except err:
+    except:
         print("Error: unable to send email")

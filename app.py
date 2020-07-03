@@ -35,7 +35,6 @@ def run_selenium(restock_url, restock_email, dropdown_name, dropdown_id, dropdow
     if track_container is not None:
         # ResultSet will only contain one element since we know there is only one such tag, so we take the first
         restockElement = html.select(track_container)[0] # Use css selector (can use find/findall too)
-        print(restockElement)
         if track_value is not None:
             # Use regex to find elements that contains the value string
             if restockElement.find(string=re.compile(track_value)):
@@ -44,11 +43,16 @@ def run_selenium(restock_url, restock_email, dropdown_name, dropdown_id, dropdow
             # Check if the class exists anywhere in current element tree or if it is present in the classlist of the current element
             if restockElement.find_all(_class=track_class) or track_class in restockElement.get("class"):
                 hasProduct = True
+    driver.quit()
 
     if hasProduct:
         send_restock_email(restock_email)
+    
+    return jsonify({'PRODUCT_AVAILABLE': hasProduct})
 
-    driver.quit()
+
+# TEST URL
+# http://0.0.0.0:5100/checkrestock?restock_email=jackeaik@hotmail.com&track_container=div.product-stock-status&track_value=I%20lager&track_class=product-status-ok&restock_url=https://www.mmsports.se/Kosttillskott/Protein/Vassleprotein-Whey/Body-Science-Whey-100.html?gclid=CjwKCAjw_-D3BRBIEiwAjVMy7AJaBCisTox5QredRmOFc3ETJLJayGNN-3oqaVqXwOkl3-aiAWsbdRoCwcYQAvD_BwE
     
 @app.route('/checkrestock', methods=['GET'])
 def check_restock():
@@ -73,7 +77,7 @@ def check_restock():
     if (track_container is None or track_value is None) and track_class is None:
         return f'You have to search either by value (track_value & track_valueContainer) or class (track_class)'
 
-    run_selenium(restock_url, restock_email, dropdown_name, dropdown_id, dropdown_value, 
+    return run_selenium(restock_url, restock_email, dropdown_name, dropdown_id, dropdown_value, 
         track_container, track_value, track_class)
 
     # scheduler = BlockingScheduler()
@@ -103,10 +107,8 @@ def test():
     #     f'&track_value={track_value}&track_class={track_class}'
     # )
 
-    run_selenium(scrape_url, restock_email, dropdown_name, dropdown_id, dropdown_value, 
+    return run_selenium(scrape_url, restock_email, dropdown_name, dropdown_id, dropdown_value, 
         track_container, track_value, track_class)
-
-    return '<h1>Just testing</h1>'
 
     
     
