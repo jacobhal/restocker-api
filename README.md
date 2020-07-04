@@ -53,7 +53,7 @@ Procfile cronjob config: ```clock: python cron_job.py``` --> Run following comma
 You CAN have both lines in your Procfile config and turn the dynos off/on depending on if you want them to run or not.
 
 ## Selenium
-For this project, we had to use selenium since the web scraping depended on a certain dropdown value being chosen first (a certain product).
+For this project, I had to use selenium since the web scraping depended on a certain dropdown value being chosen first (a certain product).
 
 The geckodriver for running Selenium in Firefox was added using ```heroku buildpacks:add https://github.com/evosystem-jp/heroku-buildpack-firefox ```
 
